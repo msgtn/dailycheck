@@ -48,15 +48,25 @@ try:
     for _ in range(2):
         d.find_elements_by_id('submit')[0].click()
         time.sleep(1)
+    time.sleep(2)
 except:
     print("Could not find form...")
 
+status_idx = 2
+# check if test reminder appears
 try:
-    status = d.find_elements_by_xpath('/html/body/div[2]/main/div/article/div[2]/div/div/div/h2')[0]
+    d.find_elements_by_xpath('/html/body/div[2]/main/div/article/div[2]')[0]
+    status_idx += 1
+except:
+    pass
+
+try:
+    status = d.find_elements_by_xpath('/html/body/div[2]/main/div/article/div[{}]/div/div/div/h2'.format(status_idx))[0]
     status_msg = status.get_attribute('innerHTML')
     status_msg = status_msg[:status_msg.find('<')]+status_msg[status_msg.find('>')+1:]
     print("Status message: ", status_msg)
 except:
     print("Error logging in and completing form, no status message found.")
+    import pdb; pdb.set_trace()
 
 d.close()
