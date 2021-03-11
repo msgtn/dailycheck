@@ -61,7 +61,7 @@ except:
     pass
 
 try:
-    status = d.find_elements_by_xpath('/html/body/div[2]/main/div/article/div[{}]/div/div/div/h2'.format(status_idx))[0]
+    status = d.find_elements_by_xpath('/html/body/div[2]/main/div/article/div[3]/div/div/div/h2'.format(status_idx))[0]
     status_msg = status.get_attribute('innerHTML')
     status_msg = status_msg[:status_msg.find('<')]+status_msg[status_msg.find('>')+1:]
     print("Status message: ", status_msg)
